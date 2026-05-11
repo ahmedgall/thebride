@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> الدعم الفني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --main-gold: #D2617C;
+            --dark-pink: #ad1457;
+            --soft-pink: #fdf2f5;
+            --glass: rgba(255, 255, 255, 0.9);
+            --shadow: 0 15px 35px rgba(210, 97, 124, 0.1);
+            --bg-gradient: linear-gradient(135deg, #fdf2f5 0%, #f4f7f6 100%);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+
+        .header h1 {
+            color: var(--dark-pink);
+            font-weight: 800;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* كروت التواصل */
+        .support-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        .support-card:active { transform: scale(0.96); }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            color: white;
+        }
+
+        .whatsapp-bg { background: #25D366; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2); }
+        .chat-bg { background: var(--main-gold); box-shadow: 0 8px 20px rgba(210, 97, 124, 0.2); }
+
+        .card-info h3 { margin: 0; font-size: 18px; font-weight: 700; color: #333; }
+        .card-info p { margin: 5px 0 0; font-size: 12px; color: #888; }
+
+        /* واجهة الشات المخفية */
+        #chat-window {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            z-index: 3000;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: var(--dark-pink);
+            padding: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f9f9f9;
+        }
+
+        .msg {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .sent { background: var(--main-gold); color: white; align-self: flex-start; border-bottom-right-radius: 2px; }
+        .received { background: #eee; color: #333; align-self: flex-end; border-bottom-left-radius: 2px; }
+
+        .chat-input-area {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            outline: none;
+        }
+
+        .send-btn {
+            background: var(--dark-pink);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div style="font-size: 40px; margin-bottom: 10px;">🎧</div>
+        <h1>مركز المساعدة</h1>
+        <p>فريق ليلتي في خدمتك دائماً</p>
+    </div>
+
+    <a href="https://wa.me/201234567890" class="support-card">
+        <div class="icon-circle whatsapp-bg">
+            <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <div class="card-info">
+            <h3>تواصل عبر واتساب</h3>
+            <p>رد سريع ومباشر على استفساراتك</p>
+        </div>
+        <i class="fa-solid fa-chevron-left" style="margin-right: auto; color: #ccc;"></i>
+    </a>
+
+
+
+  <a href="https://wa.me/201234567890" class="support-card">
+        <div class="icon-circle whatsapp-bg">
+            <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <div class="card-info">
+            <h3>تواصل واتس مع الاداره</h3>
+            <p>رد سريع ومباشر على استفساراتك</p>
+        </div>
+        <i class="fa-solid fa-chevron-left" style="margin-right: auto; color: #ccc;"></i>
+    </a>
+
+
+
+
+
+
+    <div class="support-card" onclick="openChat()" style="cursor: pointer;">
+        <div class="icon-circle chat-bg">
+            <i class="fa-solid fa-comments"></i>
+        </div>
+        <div class="card-info">
+            <h3>شات مباشر (داخل التطبيق)</h3>
+            <p>تحدث مع الدعم الفني الآن</p>
+        </div>
+        <i class="fa-solid fa-chevron-left" style="margin-right: auto; color: #ccc;"></i>
+    </div>
+
+
+
+<a href="tel:+201000000000" class="call-btn-float" title="اتصلي بنا الآن">
+    <i class="fa-solid fa-phone-volume"></i>
+    <span class="pulse-ring"></span>
+</a>
+
+<style>
+    /* تصميم الزرار العائم */
+    .call-btn-float {
+        position: fixed;
+        bottom: 30px;
+        left: 30px; /* خليه شمال عشان ميزحمش زراير تانية */
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #D2617C, #ad1457);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        box-shadow: 0 10px 25px rgba(210, 97, 124, 0.4);
+        text-decoration: none;
+        z-index: 999;
+        transition: all 0.3s ease;
+    }
+
+    .call-btn-float:hover {
+        transform: scale(1.1);
+        box-shadow: 0 15px 30px rgba(210, 97, 124, 0.6);
+    }
+
+    /* تأثير الحلقة النابضة (Pulse Effect) */
+    .pulse-ring {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(210, 97, 124, 0.4);
+        border-radius: 50%;
+        z-index: -1;
+        animation: pulse-animation 2s infinite;
+    }
+
+    @keyframes pulse-animation {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1.8);
+            opacity: 0;
+        }
+    }
+
+    /* حركة خفيفة للأيقونة */
+    .call-btn-float i {
+        animation: shake 3s infinite;
+    }
+
+    @keyframes shake {
+        0%, 90%, 100% { transform: rotate(0); }
+        92% { transform: rotate(10deg); }
+        94% { transform: rotate(-10deg); }
+        96% { transform: rotate(10deg); }
+        98% { transform: rotate(-10deg); }
+    }
+</style>
+
+
+
+
+    <div id="chat-window">
+        <div class="chat-header">
+            <i class="fa-solid fa-arrow-right" onclick="closeChat()"></i>
+            <span style="font-weight: 700;">الدعم المباشر - ليلتي</span>
+        </div>
+        <div id="messages">
+            <div class="msg received">مرحباً بك! كيف يمكننا مساعدتك اليوم؟</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="اكتب رسالتك هنا...">
+            <button class="send-btn" id="send-msg"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+        // نفس إعدادات الفايربيس بتاعتك
+        const firebaseConfig = {
+            apiKey: "AIzaSyDXLzoTGPV7uvmstWrXU8F3U7dZy1VCY2k",
+            authDomain: "gggg-4cab7.firebaseapp.com",
+            projectId: "gggg-4cab7",
+            storageBucket: "gggg-4cab7.firebasestorage.app",
+            messagingSenderId: "51351904886",
+            appId: "1:51351904886:web:e71724e6bbd2837f333557"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const phone = localStorage.getItem('loggedPhone') || "Guest";
+
+        window.openChat = () => { document.getElementById('chat-window').style.display = 'flex'; }
+        window.closeChat = () => { document.getElementById('chat-window').style.display = 'none'; }
+
+        // إرسال رسالة
+        document.getElementById('send-msg').onclick = async () => {
+            const input = document.getElementById('chat-input');
+            if(input.value.trim() !== "") {
+                await addDoc(collection(db, "support_chats"), {
+                    sender: phone,
+                    text: input.value,
+                    timestamp: serverTimestamp()
+                });
+                input.value = "";
+            }
+        };
+
+        // استماع للرسائل في الوقت الفعلي
+        const q = query(collection(db, "support_chats"), orderBy("timestamp", "asc"));
+        onSnapshot(q, (snapshot) => {
+            const msgDiv = document.getElementById('messages');
+            msgDiv.innerHTML = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const div = document.createElement('div');
+                div.className = `msg ${data.sender === phone ? 'sent' : 'received'}`;
+                div.innerText = data.text;
+                msgDiv.appendChild(div);
+            });
+            msgDiv.scrollTop = msgDiv.scrollHeight;
+        });
+    </script>
+</body>
+</html>

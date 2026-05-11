@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عالمكِ الملكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --pink: #D2617C;
+            --pink-dark: #ad1457;
+            --soft-pink: #fdf2f5;
+            --bg: #f8f9fa;
+            --nav-bg: #1e1e1e;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg);
+            padding-bottom: 8px;
+            overflow-x: hidden;
+            min-height: 8vh;
+        }
+
+        /* تأثير الثلج الراقي */
+        .snow-container {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .snow {
+            position: absolute;
+            width: 5px; height: 5px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) translateX(20px); }
+        }
+
+        /* الهيدر المطور */
+        .fixed-header {
+            padding: 20px;
+            background: white;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .main-logo { width: 110px; transition: 0.3s; }
+        .app-slogan { font-size: 13px; color: var(--pink); font-weight: 700; margin-top: 5px; }
+
+        /* السلايدر السينمائي */
+        .hero-slider {
+            height: 250px;
+            margin: 15px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .slide { width: 100%; height: 100%; position: absolute; opacity: 0; transition: 1s ease-in-out; }
+        .slide.active { opacity: 1; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            height: 50%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            display: flex; align-items: flex-end; padding: 20px;
+        }
+        .slide-text { color: white; font-weight: 800; font-size: 18px; }
+
+        /* شبكة الخدمات الملكية - الكروت الكبيرة */
+        .main-services { padding: 10px 15px; }
+        
+        .section-label {
+            font-size: 18px; 
+            font-weight: 800; 
+            color: #2c3e50;
+            margin-bottom: 25px; 
+            border-right: 5px solid var(--pink); 
+            padding-right: 12px;
+            margin-top: 10px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* عمودين لزيادة حجم الكروت */
+            gap: 18px;
+        }
+        
+        .categories-grid a { text-decoration: none; }
+
+        .cat-card {
+            background: white;
+            border-radius: 28px;
+            padding: 25px 10px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0,0,0,0.01);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cat-card:active { 
+            transform: scale(0.92); 
+            background: var(--soft-pink);
+        }
+        
+        .cat-icon-bg {
+            width: 75px; 
+            height: 75px;
+            background: var(--soft-pink);
+            border-radius: 22px;
+            margin-bottom: 15px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        
+        .cat-icon-bg img { width: 45px; height: 45px; object-fit: contain; }
+        
+        .cat-card span { 
+            font-size: 14px; 
+            font-weight: 800; 
+            color: #333; 
+            display: block; 
+        }
+
+        /* ستايل خاص لشين (Shein) */
+        .shein-style { 
+            background: #000; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .shein-style span { color: white; }
+        .shein-style .cat-icon-bg { background: #222; }
+        .shein-style .cat-icon-bg img { filter: brightness(0) invert(1); }
+
+        /* الناف بار الفخم */
+        .nav-bar {
+            position: fixed; bottom: 20px; left: 20px; right: 20px;
+            background: var(--nav-bg);
+            height: 70px; border-radius: 25px;
+            display: flex; justify-content: space-around; align-items: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2); z-index: 2000;
+        }
+        .nav-item {
+            text-decoration: none; color: #666;
+            display: flex; flex-direction: column; align-items: center; gap: 4px; transition: 0.3s;
+        }
+        .nav-item i { font-size: 20px; }
+        .nav-item span { font-size: 10px; font-weight: 600; }
+        .nav-item.active { color: var(--pink); transform: translateY(-5px); }
+        .active-dot { width: 5px; height: 5px; background: var(--pink); border-radius: 50%; margin-top: 3px; }
+
+        /* الفوتر */
+        .footer-info { text-align: center; padding: 40px 20px 140px; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <div class="snow-container" id="snow"></div>
+
+    <header class="fixed-header">
+        <img src="1.png" alt="the bride" class="main-logo">
+        <p class="app-slogan">لأنكِ ملكة.. ليلتكِ تبدأ من هنا</p>
+    </header>
+
+    <section class="hero-slider">
+        <div class="slide active">
+            <img src="2.png" alt="فخامة القاعات">
+            <div class="slide-overlay"><div class="slide-text">أفخم قاعات الزفاف</div></div>
+        </div>
+        <div class="slide">
+            <img src="4.png" alt="أرقى الفساتين">
+            <div class="slide-overlay"><div class="slide-text">فساتين أحلامكِ هنا</div></div>
+        </div>
+        <div class="slide">
+            <img src="3.png" alt="ليلة العمر">
+            <div class="slide-overlay"><div class="slide-text">خبراء التجميل والمكياج</div></div>
+        </div>
+    </section>
+
+    <main class="main-services">
+        <h3 class="section-label">اكتشفي خدماتنا الملكية</h3>
+        
+        <div class="categories-grid">
+            <a href="halls.html"><div class="cat-card"><div class="cat-icon-bg"><img src="halls.png"></div><span>قاعات زفاف</span></div></a>
+            <a href="dress.html"><div class="cat-card"><div class="cat-icon-bg"><img src="dress.png"></div><span>فساتين زفاف</span></div></a>
+            <a href="makeup.html"><div class="cat-card"><div class="cat-icon-bg"><img src="makeup.png"></div><span>ميكاب ارتست</span></div></a>
+            <a href="photo.html"><div class="cat-card"><div class="cat-icon-bg"><img src="photographer.png"></div><span>فوتوغرافير</span></div></a>
+            <a href="center.html"><div class="cat-card"><div class="cat-icon-bg"><img src="center.png"></div><span>مراكز تجميل</span></div></a>
+            <a href="bodycare.html"><div class="cat-card"><div class="cat-icon-bg"><img src="body.png"></div><span>عناية بالجسم</span></div></a>
+            <a href="lem.html"><div class="cat-card"><div class="cat-icon-bg"><img src="limousine.png"></div><span>ليموزين</span></div></a>
+            <a href="hony.html"><div class="cat-card"><div class="cat-icon-bg"><img src="travel.png"></div><span>هانيمون</span></div></a>
+            <a href="hear.html"><div class="cat-card"><div class="cat-icon-bg"><img src="hairdresser.png"></div><span>مصفف شعر</span></div></a>
+            <a href="flower.html"><div class="cat-card"><div class="cat-icon-bg"><img src="bouquet.png"></div><span>بوكيهات ورد</span></div></a>
+            
+            <a href="shin.html" style="grid-column: span 2;">
+                <div class="cat-card shein-style">
+                    <div class="cat-icon-bg"><img src="shi.png"></div>
+                    <span>تسوقي من SHEIN بخصومات حصرية</span>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <div class="footer-info">
+        <p style="font-size: 11px;">تطبيق the bride © 2026</p>
+        <a href="privacy.html" style="color: var(--pink); text-decoration: none; font-size: 12px; font-weight: bold;">سياسة الخصوصية</a>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="inde.html" class="nav-item active">
+            <i class="fa-solid fa-house-chimney"></i>
+            <span>الرئيسية</span>
+            <div class="active-dot"></div>
+        </a>
+        <a href="hog.html" class="nav-item">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>حجوزاتي</span>
+        </a>
+        <a href="ac.html" class="nav-item">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>حسابي</span>
+        </a>
+    </nav>
+
+    <script>
+        // سكريبت السلايدر التلقائي
+        let slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 4000);
+
+        // توليد الثلج برمجياً
+        const snowContainer = document.getElementById('snow');
+        for (let i = 0; i < 20; i++) {
+            let flake = document.createElement('div');
+            flake.className = 'snow';
+            flake.style.left = Math.random() * 50 + 'vw';
+            flake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            flake.style.opacity = Math.random();
+            snowContainer.appendChild(flake);
+        }
+   </script>
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+    import { getFirestore, collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+    // نفس إعدادات الفايربيس بتاعتك
+    const firebaseConfig = {
+        apiKey: "AIzaSyDXLzoTGPV7uvmstWrXU8F3U7dZy1VCY2k",
+        authDomain: "gggg-4cab7.firebaseapp.com",
+        projectId: "gggg-4cab7",
+        storageBucket: "gggg-4cab7.firebasestorage.app",
+        messagingSenderId: "51351904886",
+        appId: "1:51351904886:web:e71724e6bbd2837f333557"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 1. التأكد إن المستخدم مسجل دخول أصلاً
+    const userPhone = localStorage.getItem('loggedPhone');
+    if (!userPhone) {
+        window.location.href = "login.html"; // لو مش مسجل دخول يروح لصفحة الدخول
+    } else {
+        // 2. مراقبة حالة الحظر لحظياً
+        const q = query(collection(db, "users"), where("phoneNumber", "==", userPhone));
+        
+        onSnapshot(q, (snapshot) => {
+            snapshot.forEach((doc) => {
+                const userData = doc.data();
+                if (userData.status === 'banned') {
+                    // لو الأدمن عمل حظر وهو فاتح الصفحة.. اطردوا فوراً
+                    alert("عذراً، تم حظر حسابك. يرجى التواصل مع الإدارة.");
+                    localStorage.removeItem('loggedPhone'); // امسح الجلسة
+                    window.location.href = "login.html"; // رجعه للدخول
+                }
+            });
+        });
+    }
+</script>
+
+
+
+</body>
+</html>
+

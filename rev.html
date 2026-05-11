@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ليلتي - تجارب المستخدمين</title>
+    <style>
+        :root {
+            --primary: #d81b60;
+            --secondary: #fce4ec;
+            --white: #ffffff;
+            --text: #333;
+            --star: #fbc02d;
+            --hall: #4a148c; /* لون مخصص للقاعات */
+            --beauty: #c2185b; /* لون مخصص للكوافير */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--white);
+            border-radius: 40px;
+            padding: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        /* وسام التصنيف */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .badge-hall { background: var(--hall); }
+        .badge-beauty { background: var(--beauty); }
+
+        .rev-card {
+            background: #fff;
+            border-radius: 25px;
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        .user-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .avatar-svg { width: 40px; height: 40px; }
+
+        .info b { font-size: 14px; display: block; color: var(--primary); }
+        .target-name { font-size: 12px; color: #777; }
+
+        .comment {
+            font-size: 13.5px;
+            color: #555;
+            line-height: 1.5;
+            margin: 10px 0;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 12px;
+            border-right: 3px solid var(--primary);
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 9/16; /* مناسب لفيديوهات الموبايل الطولية */
+        }
+
+        video { width: 100%; height: 100%; object-fit: cover; }
+
+        /* اللايكات الحقيقية */
+        .like-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 12px;
+        }
+
+        .like-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: 1px solid #eee;
+            padding: 6px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #666;
+            transition: 0.3s;
+        }
+
+        .like-btn.active {
+            background: var(--secondary);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .like-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+        .like-btn.active svg { fill: var(--primary); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <svg viewBox="0 0 24 24" style="width: 50px; fill: var(--primary);">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+        <h2 style="margin: 5px 0; color: var(--primary);">ريفيوهات ليلتي الموثقة</h2>
+        <p style="font-size: 12px; color: #888;">تجارب حقيقية من داخل التطبيق</p>
+    </div>
+
+    <div id="reviewsContainer"></div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot, updateDoc, increment, setDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDXLzoTGPV7uvmstWrXU8F3U7dZy1VCY2k",
+        authDomain: "gggg-4cab7.firebaseapp.com",
+        projectId: "gggg-4cab7",
+        storageBucket: "gggg-4cab7.firebasestorage.app",
+        messagingSenderId: "51351904886",
+        appId: "1:51351904886:web:e71724e6bbd2837f333557"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // داتا الريفيوهات - تقدر تعدل فيها بسهولة
+    const reviews = [
+        {
+            id: "hall_01",
+            type: "قاعة أفراح",
+            target: "قاعة الماسة - القاهرة",
+            user: "أحمد مجدي",
+            text: "القاعة كانت فوق الوصف، والتنظيم من خلال تطبيق ليلتي وفر عليا مجهود جبار. الفيديو ده لقطات من الفرح.",
+            video: "hall1.mp4",
+            badgeClass: "badge-hall"
+        },
+        {
+            id: "beauty_01",
+            type: "كوافير وميك أب",
+            target: "بيوتي سنتر ليلى",
+            user: "سارة محمد",
+            text: "بصراحة الميك أب كان ثابت جداً والتعامل راقي. حجزت من الأبلكيشن وخدت خصم 10%.",
+            video: "beauty1.mp4",
+            badgeClass: "badge-beauty"
+        }
+    ];
+
+    const container = document.getElementById('reviewsContainer');
+
+    // إنشاء الواجهة
+    container.innerHTML = reviews.map(r => `
+        <div class="rev-card">
+            <span class="badge ${r.badgeClass}">${r.type}</span>
+            <div class="user-row">
+                <svg class="avatar-svg" viewBox="0 0 40 40">
+                    <circle cx="20" cy="20" r="20" fill="#fce4ec"/>
+                    <text x="50%" y="55%" text-anchor="middle" alignment-baseline="central" font-size="16" fill="#d81b60" font-weight="bold">${r.user[0]}</text>
+                </svg>
+                <div class="info">
+                    <b>${r.user}</b>
+                    <span class="target-name">بخصوص: ${r.target}</span>
+                </div>
+            </div>
+            <div class="comment">${r.text}</div>
+            <div class="video-container">
+                <video controls preload="none" poster="thumb.png">
+                    <source src="${r.video}" type="video/mp4">
+                </video>
+            </div>
+            <div class="like-bar">
+                <button class="like-btn" id="btn-${r.id}" onclick="handleRealTimeLike('${r.id}')">
+                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span id="count-${r.id}">0</span>
+                </button>
+            </div>
+        </div>
+    `).join('');
+
+    // تفعيل التحديث اللحظي للايكات
+    reviews.forEach(r => {
+        onSnapshot(doc(db, "app_reviews", r.id), (snapshot) => {
+            if (snapshot.exists()) {
+                document.getElementById(`count-${r.id}`).innerText = snapshot.data().likes || 0;
+            } else {
+                setDoc(doc(db, "app_reviews", r.id), { likes: 0 });
+            }
+        });
+    });
+
+    // وظيفة اللايك
+    window.handleRealTimeLike = async (id) => {
+        const btn = document.getElementById(`btn-${id}`);
+        if(btn.classList.contains('active')) return;
+
+        btn.classList.add('active');
+        const ref = doc(db, "app_reviews", id);
+        try {
+            await updateDoc(ref, { likes: increment(1) });
+        } catch (e) {
+            await setDoc(ref, { likes: 1 });
+        }
+    };
+</script>
+</body>
+</html>

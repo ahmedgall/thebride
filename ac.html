@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بروفايل ملكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --pink: #D2617C;
+            --dark-pink: #ad1457;
+            --soft-pink: #fdf2f5;
+            --glass: rgba(255, 255, 255, 0.95);
+            --shadow: 0 20px 40px rgba(210, 97, 124, 0.12);
+            --bg-gradient: linear-gradient(135deg, #fdf2f5 0%, #f4f7f6 100%);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            padding-bottom: 120px;
+            color: #2d3436;
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* الرأس بتصميم Ultra Premium */
+        .profile-header {
+            background: linear-gradient(160deg, var(--pink), var(--dark-pink));
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 15px 35px rgba(173, 20, 87, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            top: -50%;
+            left: -50%;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .avatar-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .user-avatar {
+            width: 110px;
+            height: 110px;
+            background: white;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 45px;
+            color: var(--pink);
+            font-weight: 900;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            transform: rotate(-5deg);
+            border: 4px solid rgba(255,255,255,0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .header-title {
+            color: white;
+            margin: 15px 0 5px;
+            font-size: 24px;
+            font-weight: 800;
+            z-index: 2;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            padding: 0 20px;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* كروت بتصميم Glass */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            animation: slideIn 0.6s ease-out backwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: var(--dark-pink);
+            font-weight: 800;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .info-item:last-child { border-bottom: none; }
+
+        .icon-box {
+            width: 44px;
+            height: 44px;
+            background: var(--soft-pink);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--pink);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .info-content { flex: 1; }
+        .info-label { display: block; font-size: 10px; color: #95a5a6; font-weight: 700; margin-bottom: 4px; }
+        .info-value { display: block; font-size: 15px; font-weight: 700; color: #2c3e50; }
+
+        .btn-action {
+            background: var(--soft-pink);
+            color: var(--pink);
+            border: 1.5px solid var(--pink);
+            padding: 6px 16px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 800;
+            transition: 0.3s;
+        }
+
+        .btn-action:active { background: var(--pink); color: white; }
+
+        /* الأزرار السفلية */
+        .actions-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 5px;
+        }
+
+        .support-btn {
+            background: var(--pink);
+            color: white;
+            padding: 18px;
+            border-radius: 22px;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(210, 97, 124, 0.2);
+            transition: 0.3s;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #e74c3c;
+            padding: 16px;
+            border-radius: 22px;
+            font-weight: 800;
+            border: 2px solid #f9ebea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .support-btn:active, .logout-btn:active { transform: scale(0.96); }
+
+        /* الشريط السفلي (ثابت) */
+        .nav-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: #1e1e1e;
+            height: 70px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            z-index: 2000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-item i { font-size: 20px; }
+        .nav-item span { font-size: 10px; font-weight: 600; }
+        .nav-item.active { color: var(--pink); transform: translateY(-5px); transition: 0.3s; }
+        .active-dot { width: 5px; height: 5px; background: var(--pink); border-radius: 50%; margin-top: 3px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="profile-header">
+        <div class="avatar-container">
+            <div class="user-avatar" id="avatarChar">?</div>
+        </div>
+        <div class="header-title" id="topName">تحميل...</div>
+      
+    </div>
+
+    <div class="container">
+        <div class="card" style="animation-delay: 0.1s;">
+            <div class="section-header">
+                <i class="fa-solid fa-crown"></i>
+                <span>البيانات الملكية</span>
+            </div>
+            
+            <div class="info-item">
+                <div class="icon-box"><i class="fa-solid fa-user-tie"></i></div>
+                <div class="info-content">
+                    <span class="info-label">الاسم</span>
+                    <span class="info-value" id="userName">---</span>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon-box"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="info-content">
+                    <span class="info-label">رقم الهاتف</span>
+                    <span class="info-value" id="userPhone">---</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="animation-delay: 0.2s;">
+            <div class="section-header">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>الأمان والخصوصية</span>
+            </div>
+
+            <div class="info-item">
+                <div class="icon-box"><i class="fa-solid fa-fingerprint"></i></div>
+                <div class="info-content">
+                    <span class="info-label">كلمة المرور</span>
+                    <span class="info-value">••••••••</span>
+                </div>
+                <button class="btn-action" onclick="changePass()">تعديل</button>
+            </div>
+
+            <div class="info-item">
+                <div class="icon-box" style="color:#2ecc71; background:#e8f8f0;"><i class="fa-solid fa-check-double"></i></div>
+                <div class="info-content">
+                    <span class="info-label">حالة الحساب</span>
+                    <span class="info-value" style="color:#2ecc71;">نشط وموثق</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions-group" style="animation-delay: 0.3s;">
+            <a href="support.html" class="support-btn">
+                <i class="fa-solid fa-comments"></i>
+                تحدث مع الدعم الفني
+            </a>
+
+            <button class="logout-btn" onclick="logout()">
+                <i class="fa-solid fa-power-off"></i>
+                خروج آمن
+            </button>
+        </div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="inde.html" class="nav-item">
+            <i class="fa-solid fa-house-chimney"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="hog.html" class="nav-item">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>حجوزاتي</span>
+        </a>
+        <a href="ac.html" class="nav-item active">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>حسابي</span>
+            <div class="active-dot"></div>
+        </a>
+    </nav>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDXLzoTGPV7uvmstWrXU8F3U7dZy1VCY2k",
+            authDomain: "gggg-4cab7.firebaseapp.com",
+            projectId: "gggg-4cab7",
+            storageBucket: "gggg-4cab7.firebasestorage.app",
+            messagingSenderId: "51351904886",
+            appId: "1:51351904886:web:e71724e6bbd2837f333557"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const phone = localStorage.getItem('loggedPhone');
+
+        async function fetchUserData() {
+            if(!phone) { window.location.href = "index.html"; return; }
+            try {
+                const q = query(collection(db, "users"), where("phoneNumber", "==", phone));
+                const snap = await getDocs(q);
+                if(!snap.empty) {
+                    const userDoc = snap.docs[0];
+                    const data = userDoc.data();
+                    const name = data.fullName;
+                    document.getElementById('userName').innerText = name;
+                    document.getElementById('topName').innerText = name;
+                    document.getElementById('userPhone').innerText = data.phoneNumber;
+                    document.getElementById('avatarChar').innerText = name.charAt(0).toUpperCase();
+                    localStorage.setItem('currentUserId', userDoc.id);
+                }
+            } catch (error) { console.error(error); }
+        }
+
+        window.changePass = async () => {
+            const newPass = prompt("أدخل كلمة السر الجديدة:");
+            if(newPass && newPass.length >= 6) {
+                const id = localStorage.getItem('currentUserId');
+                try {
+                    await updateDoc(doc(db, "users", id), { password: newPass });
+                    alert("تم تأمين حسابك بكلمة السر الجديدة.");
+                } catch (e) { alert("عذراً، حاول مرة أخرى."); }
+            }
+        }
+
+        window.logout = () => {
+            if(confirm("هل تود تسجيل الخروج؟")) {
+                localStorage.clear();
+                window.location.href = "login.html";
+            }
+        }
+
+        fetchUserData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة الخصوصية - تطبيق the bride | Privacy Policy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #D2617C;
+            --primary-light: #fdf2f5;
+            --secondary: #2d3436;
+            --text-main: #4b4b4b;
+            --bg: #f8fafb;
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            line-height: 1.8;
+            color: var(--text-main);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ناف بار علوي بسيط */
+        .top-nav {
+            background: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .logo-text { font-weight: 800; color: var(--primary); font-size: 20px; }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: ''; position: absolute; top: 0; right: 0; left: 0;
+            height: 6px; background: linear-gradient(90deg, var(--primary), #ad1457);
+        }
+
+        h1 { color: var(--secondary); font-size: 28px; font-weight: 800; text-align: center; margin-bottom: 10px; }
+        .update-date { text-align: center; color: #999; font-size: 13px; margin-bottom: 40px; }
+
+        section { margin-bottom: 35px; animation: fadeIn 0.5s ease forwards; }
+
+        h2 {
+            color: var(--primary);
+            font-size: 19px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        h2 i { font-size: 16px; background: var(--primary-light); padding: 10px; border-radius: 12px; }
+
+        p, li { font-size: 15px; color: var(--text-main); }
+        ul { padding-right: 20px; list-style-type: circle; }
+
+        /* أزرار اللغة */
+        .btn-group { display: flex; gap: 8px; }
+        .lang-btn {
+            border: 1px solid #eee;
+            padding: 8px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Tajawal';
+            font-weight: 700;
+            background: white;
+            font-size: 13px;
+        }
+        .lang-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* قسم الدعم */
+        .support-card {
+            background: var(--primary-light);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .c-link {
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: white;
+            font-size: 14px;
+        }
+
+        .whatsapp { background: #25D366; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2); }
+        .email { background: var(--secondary); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+
+        footer { text-align: center; padding: 40px; color: #bbb; font-size: 12px; }
+
+        /* الحركات */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .en-content { display: none; text-align: left; direction: ltr; }
+        .en-content h2 { flex-direction: row-reverse; }
+
+        @media (max-width: 600px) {
+            .container { padding: 30px 20px; margin: 20px; }
+            h1 { font-size: 22px; }
+            .c-link { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="logo-text">ليلتـي</div>
+        <div class="btn-group">
+            <button onclick="toggleLang('ar')" id="btn-ar" class="lang-btn active">العربية</button>
+            <button onclick="toggleLang('en')" id="btn-en" class="lang-btn">English</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="ar-content" class="content-wrapper">
+            <h1>سياسة الخصوصية</h1>
+            <p class="update-date">تاريخ آخر تحديث: مارس 2026</p>
+
+            <section>
+                <p>مرحباً بكِ في <strong>"the bride"</strong>. نحن نلتزم بحماية بياناتكِ لضمان تجربة آمنة ومريحة.</p>
+            </section>
+
+            <section>
+                <h2><i class="fa-solid fa-database"></i> 1. المعلومات التي نجمعها</h2>
+                <ul>
+                    <li><strong>بيانات الحساب:</strong> رقم الهاتف والاسم لتسهيل التواصل.</li>
+                    <li><strong>بيانات الدفع:</strong> رقم التحويل أو صورة الإيصال للتحقق من الجدية.</li>
+                    <li><strong>بيانات الجهاز:</strong> معلومات تقنية لتحسين الأداء عبر Firebase.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2><i class="fa-solid fa-circle-check"></i> 2. كيف نستخدم بياناتك</h2>
+                <p>نستخدم بياناتك لتأكيد حجزك لدى مقدمي الخدمة، إرسال التنبيهات، وحماية حسابك من الاحتيال.</p>
+            </section>
+
+            <section>
+                <h2><i class="fa-solid fa-shield-halved"></i> 3. مشاركة وحماية البيانات</h2>
+                <p>يتم تخزين بياناتك على خوادم <strong>Google Firebase</strong> المشفرة. لا نشارك بياناتك إلا مع مقدم الخدمة الذي قمتِ باختياره (مثل القاعة) لإتمام حجزك.</p>
+            </section>
+
+            <section>
+                <h2><i class="fa-solid fa-user-xmark"></i> 4. حذف البيانات</h2>
+                <p>يمكنكِ حذف حسابكِ نهائياً في أي وقت من خلال الإعدادات، وسيتم مسح كافة سجلاتكِ فوراً من أنظمتنا.</p>
+            </section>
+        </div>
+
+        <div id="en-content" class="en-content">
+            <h1>Privacy Policy</h1>
+            <p class="update-date">Last Updated: March 2026</p>
+
+            <section>
+                <p>Welcome to <strong>Laylati</strong>. Your privacy is our priority. We ensure your personal information is protected.</p>
+            </section>
+
+            <section>
+                <h2><i class="fa-solid fa-database"></i> 1. Information We Collect</h2>
+                <ul>
+                    <li><strong>Account Data:</strong> Phone number and name.</li>
+                    <li><strong>Payment Data:</strong> Transfer numbers or receipt images for verification.</li>
+                    <li><strong>Device Data:</strong> Technical performance logs via Firebase.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2><i class="fa-solid fa-circle-check"></i> 2. Usage of Data</h2>
+                <p>We use your data to manage bookings, send notifications, and ensure account security.</p>
+            </section>
+
+            <section>
+                <h2><i class="fa-solid fa-shield-halved"></i> 3. Security & Sharing</h2>
+                <p>Your data is securely stored on <strong>Google Firebase</strong> encrypted servers. We only share details with your chosen service provider.</p>
+            </section>
+        </div>
+
+        <div class="support-card">
+            <h3 id="support-title" style="margin:0; font-size:18px;">هل لديكِ استفسار؟ تواصل مع الدعم</h3>
+            <div class="contact-links">
+                <a href="https://wa.me/2010XXXXXXXX" class="c-link whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> واتساب
+                </a>
+                <a href="mailto:support@fixaa-arab.com" class="c-link email">
+                    <i class="fa-solid fa-envelope"></i> البريد الإلكتروني
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Fixaa Arab Software Solutions. All rights reserved.
+    </footer>
+
+    <script>
+        function toggleLang(lang) {
+            const ar = document.getElementById('ar-content');
+            const en = document.getElementById('en-content');
+            const btnAr = document.getElementById('btn-ar');
+            const btnEn = document.getElementById('btn-en');
+            const supportTitle = document.getElementById('support-title');
+
+            if (lang === 'en') {
+                ar.style.display = 'none';
+                en.style.display = 'block';
+                btnEn.classList.add('active');
+                btnAr.classList.remove('active');
+                document.body.dir = "ltr";
+                supportTitle.innerText = "Have questions? Contact Support";
+            } else {
+                en.style.display = 'none';
+                ar.style.display = 'block';
+                btnAr.classList.add('active');
+                btnEn.classList.remove('active');
+                document.body.dir = "rtl";
+                supportTitle.innerText = "هل لديكِ استفسار؟ تواصل مع الدعم";
+            }
+        }
+    </script>
+</body>
+</html>

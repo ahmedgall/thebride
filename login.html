@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the bride - تسجيل الدخول والاشتراك</title>
+    <style>
+        :root {
+            --primary: #d81b60; /* الوردي الغامق */
+            --secondary: #fce4ec; /* الوردي الفاتح خلفية */
+            --white: #ffffff;
+            --text: #444;
+            --border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .container {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(216, 27, 96, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            border: 1px solid rgba(216, 27, 96, 0.1);
+        }
+
+        .logo { 
+            width: 90px; 
+            height: 90px; 
+            margin-bottom: 1rem; 
+            border: 3px solid var(--primary); 
+            border-radius: 50%; 
+            padding: 3px;
+            object-fit: cover;
+        }
+
+        h2 { 
+            color: var(--primary); 
+            margin-bottom: 1.5rem; 
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+
+        .grid-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .full-width { grid-column: span 2; }
+
+        .field { text-align: right; }
+
+        input {
+            width: 100%;
+            padding: 13px 18px;
+            background: #fdfdfd;
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            color: #333;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        input:focus { 
+            border-color: var(--primary); 
+            background: #fff;
+            box-shadow: 0 0 8px rgba(216, 27, 96, 0.1);
+        }
+
+        /* تنسيق خانة السن */
+        .age-confirm {
+            grid-column: span 2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .age-confirm input { width: auto; cursor: pointer; }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s ease;
+        }
+
+        button:hover { 
+            background: #ad1457;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+        }
+
+        .toggle-btn { 
+            margin-top: 20px; 
+            display: block; 
+            color: #777; 
+            cursor: pointer; 
+            font-size: 14px; 
+        }
+        .toggle-btn span { color: var(--primary); font-weight: bold; }
+
+        #msg { 
+            margin-top: 15px; 
+            font-weight: 600; 
+            font-size: 14px; 
+            min-height: 20px;
+        }
+        
+        .hidden { display: none; }
+
+        .otp-sent { 
+            background: var(--secondary); 
+            padding: 20px; 
+            border-radius: 20px; 
+            margin-top: 15px; 
+            border: 2px dashed var(--primary); 
+        }
+
+        hr { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="1.png" alt="Logo" class="logo">
+
+        <div id="loginSec">
+            <h2>تسجيل الدخول</h2>
+            <div class="field full-width"><input type="tel" id="lPhone" placeholder="رقم الموبايل"></div>
+            <div class="field full-width" style="margin-top:12px;"><input type="password" id="lPass" placeholder="كلمة السر"></div>
+            <button id="btnLogin">دخول</button>
+            <div class="toggle-btn" onclick="toggleSec('forgotSec')">نسيت السر؟ <span>استعادة</span></div>
+            <hr>
+            <div class="toggle-btn" onclick="toggleSec('signSec')">ليس لديك حساب؟ <span>سجل حساب جديد</span></div>
+        </div>
+
+        <div id="signSec" class="hidden">
+            <h2>إنشاء حساب</h2>
+            <div class="grid-inputs">
+                <div class="field full-width"><input type="text" id="rName" placeholder="الاسم بالكامل"></div>
+                <div class="field"><input type="tel" id="rPhone" placeholder="رقم الواتساب"></div>
+                <div class="field"><input type="number" id="rNid" placeholder="الرقم القومي (14)"></div>
+                <div class="field"><input type="password" id="rPass" placeholder="كلمة السر"></div>
+                <div class="field"><input type="password" id="rConf" placeholder="تأكيد السر"></div>
+                <div class="age-confirm">
+                    <input type="checkbox" id="rAge">
+                    <label for="rAge">أقر بأن عمري لا يقل عن 18 عاماً.</label>
+                </div>
+            </div>
+            <button id="btnSend">إرسال كود التفعيل واتساب</button>
+            
+            <div id="otpBox" class="hidden otp-sent">
+                <p style="margin-bottom:10px; font-size:13px;">أدخل الرمز المكون من 4 أرقام</p>
+                <input type="text" id="otpIn" placeholder="0 0 0 0" style="text-align:center; letter-spacing:8px; font-weight:bold;">
+                <button id="btnVerify" style="background:#444; margin-top:10px;">تأكيد وإنشاء الحساب</button>
+            </div>
+            <div class="toggle-btn" onclick="toggleSec('loginSec')">لديك حساب بالفعل؟ <span>دخول</span></div>
+        </div>
+
+        <div id="forgotSec" class="hidden">
+            <h2>استعادة الحساب</h2>
+            <input type="tel" id="fPhone" placeholder="رقم موبايلك المسجل" style="margin-bottom:10px;">
+            <button id="btnFSend">إرسال رمز التحقق</button>
+            <div id="fOtpBox" class="hidden otp-sent">
+                <input type="text" id="fOtpIn" placeholder="الرمز" class="full-width" style="margin-bottom:12px; text-align:center;">
+                <input type="password" id="fNewPass" placeholder="كلمة السر الجديدة" class="full-width">
+                <button id="btnReset">تغيير كلمة السر</button>
+            </div>
+            <div class="toggle-btn" onclick="toggleSec('loginSec')"><span>رجوع للخلف</span></div>
+        </div>
+
+        <p id="msg"></p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDXLzoTGPV7uvmstWrXU8F3U7dZy1VCY2k",
+            authDomain: "gggg-4cab7.firebaseapp.com",
+            projectId: "gggg-4cab7",
+            storageBucket: "gggg-4cab7.firebasestorage.app",
+            messagingSenderId: "51351904886",
+            appId: "1:51351904886:web:e71724e6bbd2837f333557"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        let myOtp = null;
+
+        const instance = "instance171381";
+        const token = "5fh5hfytsg5mml9n";
+
+        window.toggleSec = (id) => {
+            document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById('msg').innerText = "";
+        };
+
+        async function sendOtp(phone) {
+            myOtp = Math.floor(1000 + Math.random() * 9000);
+            let target = phone.trim();
+            if(target.startsWith('0')) target = '2' + target;
+            if(!target.startsWith('2')) target = '2' + target;
+
+            const body = new URLSearchParams({
+                'token': token,
+                'to': '+' + target,
+                'body': `*تطبيق ليلتي*\nرمز التحقق الخاص بك هو: [ ${myOtp} ]`
+            });
+
+            try {
+                const res = await fetch(`https://api.ultramsg.com/${instance}/messages/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: body
+                });
+                return res.ok;
+            } catch (e) { return false; }
+        }
+
+        // إنشاء حساب
+        document.getElementById('btnSend').onclick = async () => {
+            const p = document.getElementById('rPhone').value.trim();
+            const nid = document.getElementById('rNid').value.trim();
+            const pass = document.getElementById('rPass').value.trim();
+            const conf = document.getElementById('rConf').value.trim();
+            const isAdult = document.getElementById('rAge').checked;
+
+            if (!p || !nid || !pass) return log("يرجى ملء كافة البيانات", "red");
+            if (pass !== conf) return log("كلمتا السر غير متطابقتين", "red");
+            if (nid.length !== 14) return log("الرقم القومي غير صحيح", "red");
+            
+            // شرط السن
+            if (!isAdult) return log("يجب تأكيد أن سنك فوق 18 عاماً للاشتراك", "red");
+
+            log("جاري فحص الرقم...", "orange");
+
+            try {
+                const q = query(collection(db, "users"), where("phoneNumber", "==", p));
+                const snap = await getDocs(q);
+
+                if (!snap.empty) {
+                    return log("عفواً! هذا الرقم مشترك بالفعل", "red");
+                }
+
+                log("جاري إرسال الرمز...", "orange");
+                if (await sendOtp(p)) {
+                    document.getElementById('otpBox').classList.remove('hidden');
+                    log("تم إرسال كود التفعيل ✅", "green");
+                } else {
+                    log("فشل الإرسال، تأكد من الاتصال", "red");
+                }
+            } catch (e) { log("خطأ في السيرفر", "red"); }
+        };
+
+        document.getElementById('btnVerify').onclick = async () => {
+            if (document.getElementById('otpIn').value == myOtp) {
+                await addDoc(collection(db, "users"), {
+                    fullName: document.getElementById('rName').value,
+                    phoneNumber: document.getElementById('rPhone').value,
+                    nationalID: document.getElementById('rNid').value,
+                    password: document.getElementById('rPass').value,
+                    isAdult: true
+                });
+                localStorage.setItem('loggedPhone', document.getElementById('rPhone').value);
+                window.location.href = "inde.html";
+            } else {
+                log("الرمز غير صحيح", "red");
+            }
+        };
+
+        // تسجيل الدخول
+        document.getElementById('btnLogin').onclick = async () => {
+            const p = document.getElementById('lPhone').value.trim();
+            const ps = document.getElementById('lPass').value.trim();
+
+            if(!p || !ps) return log("يرجى إدخال البيانات", "red");
+
+            log("جاري الدخول...", "orange");
+            const q = query(collection(db, "users"), where("phoneNumber", "==", p), where("password", "==", ps));
+            const snap = await getDocs(q);
+
+            if (!snap.empty) {
+                localStorage.setItem('loggedPhone', p);
+                window.location.href = "inde.html";
+            } else {
+                log("بيانات الدخول غير صحيحة", "red");
+            }
+        };
+
+        // استعادة كلمة السر
+        document.getElementById('btnFSend').onclick = async () => {
+            const p = document.getElementById('fPhone').value.trim();
+            const q = query(collection(db, "users"), where("phoneNumber", "==", p));
+            const snap = await getDocs(q);
+
+            if(!snap.empty) {
+                log("جاري إرسال الرمز...", "orange");
+                if (await sendOtp(p)) {
+                    document.getElementById('fOtpBox').classList.remove('hidden');
+                    log("تحقق من واتساب الآن", "green");
+                }
+            } else {
+                log("الرقم غير مسجل", "red");
+            }
+        };
+
+        document.getElementById('btnReset').onclick = async () => {
+            if (document.getElementById('fOtpIn').value == myOtp) {
+                const p = document.getElementById('fPhone').value;
+                const newPass = document.getElementById('fNewPass').value;
+                const q = query(collection(db, "users"), where("phoneNumber", "==", p));
+                const snap = await getDocs(q);
+                await updateDoc(doc(db, "users", snap.docs[0].id), { password: newPass });
+                log("تم التحديث بنجاح", "green");
+                setTimeout(() => toggleSec('loginSec'), 2000);
+            } else {
+                log("الرمز غير صحيح", "red");
+            }
+        };
+
+        function log(t, c) { 
+            const m = document.getElementById('msg'); 
+            m.innerText = t; 
+            m.style.color = c; 
+        }
+    </script>
+</body>
+</html>
